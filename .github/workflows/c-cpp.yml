@@ -21,4 +21,9 @@ jobs:
     - name: Clone Theos
       run: git clone --recursive https://github.com/theos/theos.git ~/theos
     - name: make
-      run: THEOS=~/theos make
+      run: |
+        THEOS=~/theos make
+        curl -L https://github.com/theos/sdks/archive/master.zip -o sdks.zip
+        unzip sdks.zip -d ~/theos/sdks
+        mv ~/theos/sdks/sdks-master/* ~/theos/sdks/
+        rm -rf ~/theos/sdks/sdks-master sdks.zip
