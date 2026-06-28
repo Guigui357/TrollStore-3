@@ -15,6 +15,6 @@ jobs:
     - name: update submodules
       run: git submodule update --init --recursive
     - name: compile fastPathSign (no make)
-      run: clang -framework Foundation -framework CoreServices -framework Security -fobjc-arc -I/opt/homebrew/Cellar/openssl@3/3.6.2/include -I../../ChOma/src -L/opt/homebrew/Cellar/openssl@3/3.6.2/lib -lcrypto -o fastPathSign src/codesign.m src/main.m src/coretrust_bug.c ../../ChOma/src/arm64.c ../../ChOma/src/Base64.c ../../ChOma/src/BufferedStream.c ../../ChOma/src/CodeDirectory.c ../../ChOma/src/CSBlob.c ../../ChOma/src/FAT.c ../../ChOma/src/FileStream.c ../../ChOma/src/Host.c ../../ChOma/src/MachO.c ../../ChOma/src/MachOLoadCommand.c ../../ChOma/src/MemoryStream.c ../../ChOma/src/PatchFinder_arm64.c ../../ChOma/src/PatchFinder.c ../../ChOma/src/Util.c
+      run: clang -framework Foundation -framework CoreServices -framework Security -fobjc-arc -I/opt/homebrew/Cellar/openssl@3/3.6.2/include -I./ChOma/src -L/opt/homebrew/Cellar/openssl@3/3.6.2/lib -lcrypto -o ./Exploits/fastPathSign/fastPathSign ./Exploits/fastPathSign/src/codesign.m ./Exploits/fastPathSign/src/main.m ./Exploits/fastPathSign/src/coretrust_bug.c ./ChOma/src/arm64.c ./ChOma/src/Base64.c ./ChOma/src/BufferedStream.c ./ChOma/src/CodeDirectory.c ./ChOma/src/CSBlob.c ./ChOma/src/FAT.c ./ChOma/src/FileStream.c ./ChOma/src/Host.c ./ChOma/src/MachO.c ./ChOma/src/MachOLoadCommand.c ./ChOma/src/MemoryStream.c ./ChOma/src/PatchFinder_arm64.c ./ChOma/src/PatchFinder.c ./ChOma/src/Util.c
     - name: make
       run: make
