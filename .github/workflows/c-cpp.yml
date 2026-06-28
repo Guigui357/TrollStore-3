@@ -15,11 +15,16 @@ jobs:
     - name: update submodules
       run: git submodule update --init --recursive
     - name: Install Dependencies
-      run: brew install ldid xz unzip
+      run: brew install ldid xz unzip libarchive pkg-config
     - name: compile fastPathSign (no make)
       run: clang -framework Foundation -framework CoreServices -framework Security -fobjc-arc -I/opt/homebrew/Cellar/openssl@3/3.6.2/include -I./ChOma/src -L/opt/homebrew/Cellar/openssl@3/3.6.2/lib -lcrypto -o ./Exploits/fastPathSign/fastPathSign ./Exploits/fastPathSign/src/codesign.m ./Exploits/fastPathSign/src/main.m ./Exploits/fastPathSign/src/coretrust_bug.c ./ChOma/src/arm64.c ./ChOma/src/Base64.c ./ChOma/src/BufferedStream.c ./ChOma/src/CodeDirectory.c ./ChOma/src/CSBlob.c ./ChOma/src/FAT.c ./ChOma/src/FileStream.c ./ChOma/src/Host.c ./ChOma/src/MachO.c ./ChOma/src/MachOLoadCommand.c ./ChOma/src/MemoryStream.c ./ChOma/src/PatchFinder_arm64.c ./ChOma/src/PatchFinder.c ./ChOma/src/Util.c
     - name: Clone Theos
       run: git clone --recursive https://github.com/theos/theos.git ~/theos
+    - name: Install libarchive and dependencies
+      run: |
+        echo "LIBARCHIVE_INCLUDE=$(brew --prefix libarchive)/include" >> $GITHUB_ENV
+        echo "LIBARCHIVE_LIB=$(brew --prefix libarchive)/lib" >> $GITHUB_ENV
+        sed -i '' 's|-I$(shell brew --prefix)/opt/libarchive/include|-I/opt/homebrew/opt/libarchive/include|' RootHelper/Makefile
     - name: make
       run: |
         curl -L https://github.com/theos/sdks/archive/master.zip -o sdks.zip
