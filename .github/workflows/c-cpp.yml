@@ -22,5 +22,7 @@ jobs:
       run: git clone --recursive https://github.com/theos/theos.git ~/theos
     - name: Export theos to path
       run: export THEOS=~/theos
+    - name: patch makefile for theos
+      run: find . -name "Makefile" -exec sed -i '' 's|/makefiles/common.mk|$(THEOS)/makefiles/common.mk|g' {} \; && find . -name "Makefile" -exec sed -i '' 's|/tool.mk|$(THEOS)/makefiles/tool.mk|g' {} \;
     - name: make
       run: make
