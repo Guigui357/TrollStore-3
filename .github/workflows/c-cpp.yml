@@ -27,12 +27,17 @@ jobs:
         sed -i '' 's|-I$(shell brew --prefix)/opt/libarchive/include|-I/opt/homebrew/opt/libarchive/include|' RootHelper/Makefile
     - name: make
       run: |
-
         curl -L https://github.com/theos/sdks/archive/master.zip -o sdks.zip
         unzip sdks.zip -d ~/theos/sdks
         mv ~/theos/sdks/sdks-master/* ~/theos/sdks/
         rm -rf ~/theos/sdks/sdks-master sdks.zip
-        cd Exploits/pwnify
+        cd /home/runner/work/TrollStore-3/TrollStore-3/Exploits/pwnify
         make
         sudo cp pwnify /usr/local/bin/
+        cd /home/runner/work/TrollStore-3/TrollStore-3
         THEOS=~/theos make
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: trollstores (arm64e, ios 15.0, ...)
+        path: /home/runner/work/TrollStore-3/TrollStore-3/_build/*
