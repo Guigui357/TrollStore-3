@@ -31,7 +31,7 @@ jobs:
         unzip sdks.zip -d ~/theos/sdks
         mv ~/theos/sdks/sdks-master/* ~/theos/sdks/
         rm -rf ~/theos/sdks/sdks-master sdks.zip
-        cd /home/runner/work/TrollStore-3/TrollStore-3/Exploits/pwnify
+        cd /home/runner/work/TrollStore-3/TrollStore-3/Pwnify
         make
         sudo cp pwnify /usr/local/bin/
         cd /home/runner/work/TrollStore-3/TrollStore-3
