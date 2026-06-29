@@ -27,8 +27,12 @@ jobs:
         sed -i '' 's|-I$(shell brew --prefix)/opt/libarchive/include|-I/opt/homebrew/opt/libarchive/include|' RootHelper/Makefile
     - name: make
       run: |
+
         curl -L https://github.com/theos/sdks/archive/master.zip -o sdks.zip
         unzip sdks.zip -d ~/theos/sdks
         mv ~/theos/sdks/sdks-master/* ~/theos/sdks/
         rm -rf ~/theos/sdks/sdks-master sdks.zip
+        cd Exploits/pwnify
+        make
+        sudo cp pwnify /usr/local/bin/
         THEOS=~/theos make
